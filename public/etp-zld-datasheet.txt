@@ -1,0 +1,11 @@
+ETP & ZLD datasheet placeholder
+
+This is a placeholder datasheet for Effluent Treatment and ZLD systems. Replace with a PDF or detailed datasheet in /public and update the download link accordingly.
+
+Fields to include:
+- Treatment train description
+- Evaporation/crystallization method (if ZLD)
+- Capacity & loading
+- Energy consumption
+- Sludge handling & byproducts
+- Commissioning & support

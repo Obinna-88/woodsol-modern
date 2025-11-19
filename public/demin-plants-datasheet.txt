@@ -1,0 +1,11 @@
+Demin Plants datasheet placeholder
+
+This is a placeholder datasheet for Demin Water Plants. Replace with a PDF or detailed datasheet in /public and update the download link accordingly.
+
+Fields to include:
+- Model / capacity
+- Recovery rate
+- Feedwater requirements
+- Power / utilities
+- Footprint & weight
+- Warranty & support

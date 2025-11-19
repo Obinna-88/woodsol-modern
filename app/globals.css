@@ -1,0 +1,518 @@
+@import "tailwindcss";
+
+:root {
+  /* WoodSol brand palette (green + white) */
+  --woodsol-green: #0b7a44; /* primary */
+  --woodsol-green-700: #06683a; /* darker */
+  --woodsol-green-50: #f3fbf7; /* very light */
+
+  --background: #ffffff;
+  --foreground: #0b2f20; /* dark text */
+  --muted: #6b6b6b;
+  --brand-contrast: #ffffff;
+}
+
+/* theme-related variables intentionally handled in :root (removed @theme to avoid unknown at-rule) */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #07140b;
+    --foreground: #e9efe9;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Make the page a column-flex layout so the footer stays at the bottom
+   when content is short. The `#page-content` area will grow to fill
+   available space. This prevents the footer from 'hanging' in the middle
+   of the viewport on short pages. */
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+#page-content {
+  flex: 1 0 auto;
+}
+
+/* Industry badge styling */
+.industry-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: white;
+  color: var(--woodsol-green-900, #0b7a44);
+  border: 1px solid rgba(11,122,68,0.12);
+  padding: .18rem .5rem;
+  border-radius: .5rem;
+  font-size: 0.75rem;
+}
+.industry-badge svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  flex: 0 0 auto;
+}
+
+/* Industry grid card (used on About page) */
+.industry-card {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  /* Make the card clearly visible on both light and dark backgrounds */
+  background: color-mix(in srgb, var(--brand-contrast) 96%, transparent);
+  border: 1px solid rgba(11,122,68,0.06);
+  color: var(--foreground);
+  box-shadow: 0 2px 8px rgba(11,122,68,0.03);
+}
+.industry-card svg { width: 1.05rem; height: 1.05rem; flex: 0 0 auto; opacity: 1; color: var(--woodsol-green-700); }
+.industry-card span { color: var(--foreground); font-weight: 600; }
+
+/* Hover lift + shadow for industry cards */
+.industry-card {
+  position: relative;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.industry-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(11,122,68,0.08);
+  border-color: rgba(11,122,68,0.12);
+}
+
+/* CSS tooltip using data-tooltip attribute */
+.industry-card[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(100% + 8px);
+  white-space: nowrap;
+  background: rgba(2, 48, 26, 0.95);
+  color: #fff;
+  padding: 6px 8px;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  box-shadow: 0 6px 18px rgba(2,48,26,0.25);
+  z-index: 60;
+}
+.industry-card[data-tooltip]:hover::before {
+  /* small caret */
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(100% + 2px);
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: rgba(2,48,26,0.95) transparent transparent transparent;
+  z-index: 61;
+}
+
+/* Bootstrap overrides and shared utilities to enforce green/white brand */
+.btn-primary {
+  background-color: var(--woodsol-green) !important;
+  border-color: var(--woodsol-green) !important;
+  color: var(--brand-contrast) !important;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--woodsol-green-700) !important;
+  border-color: var(--woodsol-green-700) !important;
+  color: var(--brand-contrast) !important;
+}
+
+.text-primary {
+  color: var(--woodsol-green) !important;
+}
+
+/* Solid, high-contrast brand navbar */
+.navbar { background: var(--woodsol-green) !important; color: var(--brand-contrast) !important; border-bottom: 1px solid rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 1300; }
+
+.navbar:not(.bg-brand) {
+  /* If a different navbar background is used, keep earlier behavior */
+  background: rgba(255,255,255,0.98) !important;
+}
+
+/* explicit helper class to force brand background when needed */
+.bg-brand { background: var(--woodsol-green) !important; color: var(--brand-contrast) !important; }
+
+/* Default nav link color for solid-brand navbar (high contrast) */
+.navbar .nav-link,
+.navbar a.nav-link,
+.navbar .nav-item > .nav-link {
+  color: var(--brand-contrast) !important;
+  font-weight: 500;
+  text-decoration: none !important;
+}
+.navbar .nav-link:hover,
+.navbar a.nav-link:hover,
+.navbar .nav-item > .nav-link:hover {
+  color: var(--brand-contrast) !important;
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+}
+
+/* Ensure navbar toggler is visible on light backgrounds */
+.navbar-toggler {
+  border-color: rgba(11,122,68,0.12);
+}
+.navbar-toggler-icon {
+  /* fallback visible icon if Bootstrap background-image gets overridden */
+  background-image: none !important;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+  position: relative;
+}
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after,
+.navbar-toggler-icon span {
+  /* keep compatibility but also support explicit inner lines */
+  content: '';
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--woodsol-green-700);
+  border-radius: 2px;
+  position: absolute;
+  left: 0;
+}
+.navbar-toggler-icon::before { top: 0; }
+.navbar-toggler-icon span { top: 7px; }
+.navbar-toggler-icon::after { bottom: 0; }
+
+/* Explicit toggler line elements (used in Header markup) */
+.navbar-toggler .navbar-toggler-icon { display:flex; flex-direction:column; gap:5px; justify-content:center; align-items:center; width:28px; height:22px; }
+.navbar-toggler .toggler-line { display:block; width:18px; height:2px; background:var(--woodsol-green-700); border-radius:2px; }
+.navbar-toggler:focus { outline: 3px solid rgba(11,122,68,0.12); }
+
+/* make toggler lines visible on brand background */
+.navbar-toggler .toggler-line { background: var(--brand-contrast); }
+
+/* Skip-link for keyboard users */
+.skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+.skip-link:focus, .skip-link:active { position: fixed; left: 1rem; top: 1rem; width: auto; height: auto; padding: 0.5rem 0.75rem; background: var(--brand-contrast); color: var(--woodsol-green); border-radius: 6px; text-decoration: none; z-index: 1400; box-shadow: 0 6px 18px rgba(11,122,68,0.12); }
+
+/* Nav link transitions and improved focus styles */
+.navbar .nav-link { transition: color 160ms ease, background 160ms ease; }
+.navbar .nav-link:focus { outline: 3px solid rgba(255,255,255,0.12); border-radius: 6px; }
+
+/* Make the navbar container a stable flex row so brand, toggler and collapse align predictably */
+.navbar .container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Prevent brand from shrinking and ensure toggler sits above collapse */
+.navbar-brand { flex-shrink: 0; z-index: 1401; }
+.navbar-toggler { z-index: 1402; }
+
+/* Scoped nav-collapse: use a local class instead of the global `.collapse` so
+   other utility CSS (e.g. Tailwind's `.collapse { visibility: collapse }`)
+   can't hide our navbar menu. This keeps desktop behavior intact and allows
+   React to control the open state reliably on mobile. */
+.nav-collapse { display: none; }
+
+/* Desktop: show nav as flex row */
+@media (min-width: 768px) {
+  .nav-collapse { display: flex !important; }
+  .nav-collapse.open { display: flex !important; }
+}
+
+/* Mobile: when open show block, otherwise hidden */
+@media (max-width: 767px) {
+  .nav-collapse { display: none !important; }
+  .nav-collapse.open { display: block !important; }
+  .nav-collapse .navbar-nav { padding-top: 0.25rem; }
+  /* Fallback: some global utilities may still interfere; when the
+     nav has data-nav-open="true" we force it visible on mobile. */
+  .nav-collapse[data-nav-open="true"] { display: block !important; }
+}
+
+/* Ensure the collapse (menu) sits above backdrop and other content when shown */
+.navbar .navbar-collapse { position: relative; z-index: 1400; }
+
+/* Make links clickable even if layout shifting occurs */
+.navbar .nav-link { pointer-events: auto; }
+
+/* small icon next to nav link labels */
+.nav-icon { width: 18px; height: 18px; margin-right: 8px; display: inline-block; flex: 0 0 18px; color: inherit; }
+
+/* Outline primary buttons (contact) should use brand green */
+.btn-outline-primary {
+  color: var(--brand-contrast) !important;
+  border-color: rgba(255,255,255,0.18) !important;
+  background: transparent;
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background: rgba(255,255,255,0.08);
+  color: var(--brand-contrast) !important;
+  border-color: rgba(255,255,255,0.28) !important;
+}
+
+.brand-badge {
+  background: linear-gradient(90deg, var(--woodsol-green), #119c57);
+  color: var(--brand-contrast);
+  border-radius: .5rem;
+  padding: .25rem .6rem;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.brand-subtitle { font-size: 0.75rem; line-height: 1; opacity: 0.95; }
+
+/* Ensure collapsed mobile menu is readable on brand background */
+.navbar-collapse { background: var(--woodsol-green); }
+.navbar-collapse .nav-link { color: var(--brand-contrast) !important; }
+
+/* Light outline buttons on brand background */
+.btn-outline-light { color: var(--brand-contrast); border-color: rgba(255,255,255,0.18); }
+.btn-outline-light:hover { background: rgba(255,255,255,0.08); color: var(--brand-contrast); }
+
+/* Header: ensure nav items are visible and spaced on desktop */
+@media (min-width: 768px) {
+  .navbar .navbar-collapse { display: flex !important; align-items: center; }
+  .navbar .navbar-nav { display: flex !important; gap: 0.5rem; align-items: center; }
+  .navbar .nav-link { color: var(--brand-contrast) !important; font-size: 0.95rem; padding: 0.5rem 0.75rem; }
+  .navbar .nav-item.px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+}
+
+/* Mobile menu: readable spacing */
+@media (max-width: 767px) {
+  .navbar-collapse { padding: 0.75rem 1rem; }
+  .navbar .navbar-nav { flex-direction: column; gap: 0.25rem; }
+  .navbar .nav-link { padding: 0.5rem 0.25rem; }
+}
+
+/* Improve tappable targets for header links on all screens (slightly larger) */
+.navbar .nav-link { padding: 0.65rem 0.9rem; }
+.navbar .nav-link span { line-height: 1.2; }
+.navbar .nav-link .nav-icon { margin-right: 10px; }
+
+/* Make nav links full-width and easier to tap on mobile */
+@media (max-width: 767px) {
+  .navbar .nav-link { display: flex; width: 100%; padding: 0.85rem 1rem; }
+  .navbar .nav-item { width: 100%; }
+}
+
+/* Force nav visibility and stacking to avoid accidental overlap or hidden state */
+.navbar .navbar-collapse { z-index: 1400; }
+.navbar .nav-link { color: var(--brand-contrast) !important; opacity: 1 !important; visibility: visible !important; }
+.navbar .navbar-nav { gap: 0.75rem !important; }
+.navbar-brand { z-index: 1401; }
+
+/* Footer: increase tappable area for quick links on mobile */
+.footer .footer-links a { padding: 0.5rem 0.25rem; border-radius: 6px; display: inline-block; }
+@media (max-width: 576px) {
+  .footer .footer-links a { display: block; padding: 0.75rem 1rem; font-size: 1rem; }
+}
+
+/* Brand title styling */
+.brand-title { font-size: 1.05rem; line-height: 1; }
+
+.wood-card{
+  border-radius: .8rem;
+  border: 1px solid rgba(11,122,68,0.06);
+  box-shadow: 0 6px 18px rgba(11,122,68,0.04);
+  background: var(--brand-contrast);
+}
+
+.accent-underline{ height:4px; background:var(--woodsol-green); width:48px; display:inline-block; vertical-align:middle; margin-left:.5rem; border-radius:2px; }
+
+.footer { background: var(--woodsol-green-700); color: var(--brand-contrast); padding: 1rem; border-radius: .5rem; }
+
+@media (prefers-color-scheme: dark) {
+  body { background: var(--background); color: var(--foreground); }
+}
+
+/* About page hero and section styles */
+.about-hero {
+  background: linear-gradient(180deg, var(--woodsol-green), var(--woodsol-green-700));
+  color: var(--brand-contrast);
+  padding: 3rem 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 30px rgba(11,122,68,0.12);
+}
+.about-hero h1, .about-hero p { color: var(--brand-contrast); }
+
+.about-hero-grid { align-items: stretch; }
+.about-hero-copy { max-width: 56ch; }
+.about-hero-visual { display:block; border-radius: .6rem; overflow:hidden; box-shadow: 0 8px 28px rgba(0,0,0,0.18); }
+.about-hero-visual .hero-photo-main { display:block; width:100%; height:auto; object-fit:cover; }
+
+.about-stats { display:flex; gap:1rem; margin-top:1.25rem; flex-wrap:wrap; }
+.about-stat { background: rgba(255,255,255,0.06); padding: .5rem .8rem; border-radius: .6rem; min-width: 120px; text-align:center; }
+.about-stat h4 { margin:0; font-size:1.05rem; font-weight:700; color:var(--brand-contrast); }
+.about-stat p { margin:0; font-size:.85rem; color:rgba(255,255,255,0.9); }
+
+.about-section h2 { color: var(--woodsol-green); }
+.about-section p { color: #4b4b4b; }
+
+/* Emphasize the Vision/Commitment text on the About page for better contrast */
+.vision-text { color: var(--woodsol-green-700); font-weight: 700; font-size: 1.05rem; }
+.commitment-title { color: var(--woodsol-green-700); font-weight: 700; }
+
+.about-cta .btn-primary { background: var(--brand-contrast); color: var(--woodsol-green) !important; border-color: var(--brand-contrast); }
+.about-cta .btn-outline-secondary { border-color: rgba(0,0,0,0.08); }
+
+/* Chat widget styles */
+.chat-widget { position: fixed; right: 20px; bottom: 20px; z-index: 1100; }
+.chat-toggle { width:56px; height:56px; border-radius:50%; background:var(--woodsol-green); border:none; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(11,122,68,0.18); cursor:pointer; }
+.chat-toggle svg { display:block; }
+.chat-panel { width:320px; max-width:calc(100vw - 40px); background:var(--brand-contrast); border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.12); overflow:hidden; margin-bottom:12px; }
+.chat-header { padding:12px 14px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(0,0,0,0.06); }
+.chat-body { padding:12px 14px; }
+.chat-actions { padding:12px 14px; display:flex; gap:8px; justify-content:flex-end; border-top:1px solid rgba(0,0,0,0.06); }
+.chat-panel .btn-close { background:transparent; border:none; font-size:18px; line-height:1; cursor:pointer; }
+
+@media (max-width: 576px) {
+  .chat-widget { right: 12px; bottom: 12px; }
+  .chat-panel { width: 92vw; }
+}
+
+/* Small confirmation toast used by ChatWidget */
+.chat-toast {
+  position: fixed;
+  right: 92px;
+  bottom: 92px;
+  background: rgba(11,122,68,0.95);
+  color: var(--brand-contrast);
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  z-index: 1200;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 576px) {
+  .chat-toast { right: 12px; bottom: 92px; }
+}
+
+  /* Animations for chat UI */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .chat-toggle {
+    animation: fadeInUp 360ms ease both;
+  }
+
+  .chat-toast {
+    animation: fadeInUp 360ms ease both;
+  }
+
+/* Hero carousel styles */
+.hero-carousel { width: 100%; max-width: 640px; margin: 0 auto; }
+.hero-slides { width: 100%; }
+.hero-slides { transition: transform 420ms ease; }
+.hero-slides.slide-0 { transform: translateX(0%); }
+.hero-slides.slide-1 { transform: translateX(-100%); }
+.hero-slides.slide-2 { transform: translateX(-200%); }
+.hero-slide { width: 100%; flex: 0 0 100%; position: relative; }
+.hero-slide img { display: block; width: 100%; height: auto; object-fit: cover; }
+.carousel-caption { position: absolute; left: 1rem; bottom: 1rem; z-index: 30; }
+.carousel-control { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; display:flex; align-items:center; justify-content:center; border-radius:50%; opacity:0.95; }
+.carousel-control.prev { left: 8px; }
+.carousel-control.next { right: 8px; }
+.carousel-indicators { position: absolute; left: 50%; transform: translateX(-50%); bottom: 8px; display:flex; gap:6px; z-index:40; }
+.carousel-indicators .indicator { width:10px; height:10px; border-radius:50%; padding:0; border:0; background: rgba(255,255,255,0.5); }
+.carousel-indicators .indicator.active { background: var(--woodsol-green); box-shadow: 0 4px 12px rgba(11,122,68,0.16); }
+
+@media (min-width: 768px) {
+  .hero-carousel { max-width: 520px; }
+}
+
+/* Lightbox styles */
+.lightbox-overlay { position: fixed; inset: 0; z-index: 2000; display:flex; align-items:center; justify-content:center; }
+.lightbox-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.7); }
+.lightbox-content { position: relative; max-width: 90vw; max-height: 90vh; z-index: 2001; display:flex; align-items:center; justify-content:center; }
+.lightbox-image-wrapper { max-width: 100%; max-height: 100%; overflow: hidden; border-radius: 8px; }
+.lightbox-image { display:block; width: auto; height: auto; max-width: 100%; max-height: 80vh; }
+.lightbox-close { position: absolute; top: 8px; right: 8px; z-index: 2010; }
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2010; width:44px; height:44px; display:flex; align-items:center; justify-content:center; border-radius:50%; }
+.lightbox-nav.prev { left: -56px; }
+.lightbox-nav.next { right: -56px; }
+
+
+
+  /* Logo image helper: ensure height is auto when CSS changes width so
+     aspect ratio stays correct. Next/Image sets explicit width/height which
+     can trigger a warning if CSS changes only one dimension. */
+  .logo-img {
+    height: auto !important;
+    width: auto !important;
+    max-width: 100%;
+  }
+
+  /* Navigation backdrop when mobile menu is open */
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.36);
+    z-index: 1200;
+  }
+
+  /* Active nav link underline */
+  .navbar .nav-link.active {
+    position: relative;
+  }
+  .navbar .nav-link.active::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -6px;
+    width: 36px;
+    height: 3px;
+    background: var(--brand-contrast);
+    border-radius: 2px;
+  }
+
+  /* Footer styles */
+  /* Make footer background full-bleed and remove rounded corners so it spans the page like the header */
+  .footer { background: linear-gradient(180deg, var(--woodsol-green-700), var(--woodsol-green)); color: var(--brand-contrast); padding-top: 1.25rem; padding-bottom: 1.25rem; border-radius: 0; width: 100%; left: 0; right: 0; }
+
+  /* Inner wrapper keeps the centered container and allows a small vertical rhythm */
+  .footer-inner { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .footer .muted-link { color: rgba(255,255,255,0.92); text-decoration: none; }
+  .footer .muted-link:hover { text-decoration: underline; }
+  .footer .footer-links a { color: rgba(255,255,255,0.92); text-decoration: none; }
+  .footer .footer-links a:hover { text-decoration: underline; }
+
+  /* Placeholder image block used in projects listing */
+  .placeholder-image {
+    height: 140px;
+    background: linear-gradient(90deg, rgba(11,122,68,0.06), rgba(11,122,68,0.02));
+  }
+
+/* Hero photo gallery (uses images in /public) */
+.hero-photo-main { background-image: url('/Boilers1.jpg'); background-size: cover; background-position: center; min-height: 260px; }
+.hero-photo-top { background-image: url('/Boiler2.jpg'); background-size: cover; background-position: center; height: 50%; }
+.hero-photo-bottom { background-image: url('/Pipe Cleaned.jpg'); background-size: cover; background-position: center; height: 50%; }
+.hero-photo, .hero-photo-main, .hero-photo-top, .hero-photo-bottom { border-radius: .6rem; overflow: hidden; }
+
+/* Layout for hero gallery right column */
+.hero-gallery-right { display: flex; flex-direction: column; gap: .5rem; height: 260px; }
+
+/* portfolio/project image wrappers (for next/image fill use) */
+.portfolio-thumb, .project-thumb { position: relative; width: 100%; height: 160px; overflow: hidden; border-radius: .6rem; }
+.portfolio-grid img, .project-grid img { width: 100%; height: 100%; object-fit: cover; }
+
+/* subtle card polish for image cards */
+.image-card { transition: transform .18s ease, box-shadow .18s ease; }
+.image-card:hover { transform: translateY(-6px); box-shadow: 0 14px 34px rgba(11,122,68,0.08); }
+
