@@ -1,87 +1,64 @@
+"use client";
+import Image from "next/image";
 import Link from "next/link";
+import { useMemo, useState } from "react";
+
+import { SERVICES } from "../../lib/services";
 
 export default function ServicesPage() {
+  const [query, setQuery] = useState("");
+
+  const filtered = useMemo(() => {
+    const q = (query || "").trim().toLowerCase();
+    if (!q) return SERVICES;
+    return SERVICES.filter((s) => s.title.toLowerCase().includes(q) || s.summary.toLowerCase().includes(q));
+  }, [query]);
+
   return (
     <main className="container py-5">
-      <header className="mb-4">
-        <h1 className="display-6">Products & Services</h1>
-        <p className="text-muted">Comprehensive water, air and effluent treatment solutions for industrial plants.</p>
+      
+      <header className="mb-4 d-flex flex-column flex-md-row gap-3 align-items-start">
+        <div className="services-header-left">
+          <h1 className="display-6 mb-1">Products & Services</h1>
+          <p className="lead">Comprehensive water, air and effluent treatment solutions tailored for industrial operations.</p>
+        </div>
+
+        <div className="d-flex align-items-center gap-2">
+          <label htmlFor="service-search" className="visually-hidden">Search services</label>
+          <input
+            id="service-search"
+            type="search"
+            className="form-control service-search"
+            placeholder="Search services — try ‘boiler’, ‘ZLD’…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </div>
       </header>
 
-      <section className="mb-4">
-        <h2 className="h5">1. Boiler Water Treatment</h2>
-        <p className="mb-1">Bespoke boiler water treatment chemicals and programs designed to protect heat exchange surfaces, reduce scale and corrosion, and improve thermal efficiency.</p>
-        <ul>
-          <li>Organic Polylignin Treatment (environmentally friendly)</li>
-          <li>Inorganic treatments</li>
-          <li>Chemical cleaning of boilers</li>
-        </ul>
-        <p className="mb-1"><strong>Programs:</strong> Sulphite Program, DEHA Program, Polylignin Program, Amine Program, Hydrazine Program, Cetamine Program</p>
-        <p className="mb-0 text-muted small">Industries: Palm Oil Mills, Petrochemical, Power, Timber, Refineries</p>
-      </section>
-
-      <section className="mb-4">
-        <h2 className="h5">2. Cooling Water Treatment</h2>
-        <p>Cooling water chemicals and chemical cleaning for cooling towers. Prevents corrosion, bacterial growth (including Legionella), algae, and fouling.</p>
-      </section>
-
-      <section className="mb-4">
-        <h2 className="h5">3. Chilled Water System</h2>
-        <p>Chilled water chemicals and comprehensive chemical cleaning services for chilled water systems.</p>
-      </section>
-
-      <section className="mb-4">
-        <h2 className="h5">4. Demineralized (Demin) Water</h2>
-        <ul>
-          <li>Demin water supply (1m³/hr to 50m³/hr)</li>
-          <li>Custom demin plants (up to 150m³/hr)</li>
-          <li>Mobile demin plant (up to 20m³/hr)</li>
-          <li>Chloride Removal Plant (CLRP) for crude oil</li>
-        </ul>
-        <p className="text-muted small">Industries served: Shipping, Pharmaceuticals, Refineries, Processing & Power Plants</p>
-      </section>
-
-      <section className="mb-4">
-        <h2 className="h5">5. Raw Water Treatment</h2>
-        <p>Treatment chemicals and equipment including clarifiers, sand filters, softeners, and deaerators. We supply organic & inorganic polymers and design, supply & maintain Reverse Osmosis (RO) plants.</p>
-      </section>
-
-      <section className="mb-4">
-        <h2 className="h5">6. Air Pollution Control</h2>
-        <h4 className="h6 mt-2">a. Electrostatic Precipitators (ESP)</h4>
-        <p>Design, fabrication, installation, testing & commissioning for removal of suspended particles from gas streams. Partners: ACEPL (Air Control Experts Pvt. Ltd.)</p>
-        <h4 className="h6 mt-2">b. Venturi Scrubber</h4>
-        <p>Corrosion-free, cost-effective Venturi scrubber designs for palm oil & sugar mills to reduce dust, SOx/NOx emissions and opacity levels.</p>
-      </section>
-
-      <section className="mb-4">
-        <h2 className="h5">7. Effluent Treatment</h2>
-        <p>Effluent Treatment Plants (ETP), Zero Liquid Discharge (ZLD) systems and biogas systems. ZLD recycles and reuses wastewater, offering zero discharge and low operational cost.</p>
-        <p className="text-muted small">Feedstock: Agricultural, Animal, Industrial Waste, STP, MSW. Beneficiaries include farmers, gas producers and organic effluent industries.</p>
-      </section>
-
-      <section className="mb-4">
-        <h2 className="h5">8. Engineering Skid Systems</h2>
-        <ul>
-          <li>Hydrogen Sulfide (H₂S) Removal Skids</li>
-          <li>BioScrubber systems (100–200 kg/day)</li>
-          <li>Absorbent-based systems</li>
-          <li>Pressure reducing stations, metering skids and chemical injection skids</li>
-        </ul>
-      </section>
-
-      <section className="mb-4">
-        <h2 className="h5">9. Sulphur Management</h2>
-        <p>Recovery and marketing of biological sulphur (“Sulfabact”), with expertise in processing, bagging and field application.</p>
-      </section>
-
-      <section className="mb-4">
-        <h2 className="h5">10. Additional Services</h2>
-        <ul>
-          <li>Fuel oil additives (prevent sludge, corrosion, wax)</li>
-          <li>Lab reagents for water analysis (GPR & AR grade)</li>
-          <li>Industrial chemicals & reagents</li>
-        </ul>
+      <section className="row g-4">
+        {filtered.map((s) => (
+          <div key={s.id} className="col-12 col-md-6 col-lg-4">
+            <article className="wood-card overflow-hidden h-100 image-card">
+              <div className="service-image-wrapper">
+                <Image src={s.image} alt={s.title} fill className="service-image" />
+              </div>
+              <div className="p-3 d-flex flex-column service-body">
+                <h3 className="h5 mb-1">{s.title}</h3>
+                <p className="text-muted mb-2">{s.summary}</p>
+                <ul className="mb-3 small text-muted service-bullets">
+                  {s.bullets.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+                <div className="mt-auto d-flex gap-2 align-items-center">
+                  <Link href={`/services/${s.id}`} className="btn btn-outline-secondary btn-sm">Learn more</Link>
+                  <Link href="/contact" className="btn btn-primary btn-sm">Request quote</Link>
+                </div>
+              </div>
+            </article>
+          </div>
+        ))}
       </section>
 
       <section className="mt-5">

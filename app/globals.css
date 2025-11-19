@@ -10,6 +10,20 @@
   --foreground: #0b2f20; /* dark text */
   --muted: #6b6b6b;
   --brand-contrast: #ffffff;
+
+  /* Typography tokens */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --font-serif: Georgia, "Times New Roman", Times, serif;
+  --type-scale-1: 0.875rem; /* small */
+  --type-scale-2: 1rem; /* body */
+  --type-scale-3: 1.125rem; /* lead */
+  --type-scale-4: 1.5rem; /* h4 */
+  --type-scale-5: 2rem; /* h3 */
+  --type-scale-6: 2.6rem; /* h2 */
+  --type-scale-7: 3.2rem; /* h1 */
+
+  --content-max-width: 1100px;
+  --container-padding: 1rem;
 }
 
 /* theme-related variables intentionally handled in :root (removed @theme to avoid unknown at-rule) */
@@ -24,24 +38,42 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-size: var(--type-scale-2);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Make the page a column-flex layout so the footer stays at the bottom
    when content is short. The `#page-content` area will grow to fill
    available space. This prevents the footer from 'hanging' in the middle
    of the viewport on short pages. */
-html, body {
-  height: 100%;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-#page-content {
-  flex: 1 0 auto;
-}
+html, body { height: 100%; }
+/* Site root may use either body or a site-root class depending on layout.tsx */
+body { min-height: 100vh; }
+.site-root { display:flex; flex-direction:column; min-height:100vh; }
+.site-main, #page-content { flex:1 0 auto; }
+
+/* Content container default */
+.container { max-width: var(--content-max-width); padding-left: var(--container-padding); padding-right: var(--container-padding); }
+
+/* Headings */
+h1 { font-size: clamp(1.8rem, 3.6vw, var(--type-scale-7)); line-height:1.03; margin-bottom: .4rem; font-weight:700; }
+h2 { font-size: clamp(1.4rem, 3vw, var(--type-scale-6)); margin-bottom:.5rem; font-weight:700; }
+h3 { font-size: clamp(1.15rem, 2.6vw, var(--type-scale-5)); margin-bottom:.4rem; font-weight:600; }
+h4, h5, h6 { margin-bottom:.35rem; }
+
+/* Lead paragraph */
+.lead { font-size: var(--type-scale-3); color: rgba(0,0,0,0.72); }
+
+/* Links */
+a { color: var(--woodsol-green); text-decoration: underline; text-underline-offset: 3px; }
+a:hover, a:focus { color: var(--woodsol-green-700); text-decoration-thickness: 2px; }
+
+/* Focus outlines: prefer focus-visible for keyboard users */
+:focus { outline: none; }
+:focus-visible { outline: 3px solid rgba(11,122,68,0.14); outline-offset: 3px; border-radius: 6px; }
 
 /* Industry badge styling */
 .industry-badge {
@@ -366,6 +398,94 @@ body {
 .commitment-title { color: var(--woodsol-green-700); font-weight: 700; }
 
 .about-cta .btn-primary { background: var(--brand-contrast); color: var(--woodsol-green) !important; border-color: var(--brand-contrast); }
+
+/* Extracted component styles (moved from inline <style> blocks) */
+
+/* Hero and CTA */
+.hero-gradient{ background: linear-gradient(135deg, rgba(11,122,68,0.07), rgba(11,122,68,0.02)); border-radius: 1rem; }
+.hero-content{ padding: 2rem; }
+.hero-headline{ font-size: clamp(1.6rem, 3.6vw, 2.4rem); line-height:1.05; }
+.hero-lead{ color: rgba(0,0,0,0.65); margin-top:.6rem; }
+.accent-underline{ display:inline-block; height:5px; background:var(--woodsol-green); width:64px; vertical-align:middle; margin-left:.5rem; border-radius:3px; }
+
+/* Service cards */
+.service-card{ transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s ease; will-change: transform; }
+.service-card:hover, .service-card:focus-within { transform: translateY(-8px); box-shadow: 0 22px 48px rgba(11,122,68,0.12); }
+.service-icon{ font-size:1.4rem; width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; border-radius:.5rem; background: linear-gradient(180deg, rgba(11,122,68,0.06), rgba(11,122,68,0.02)); color:var(--woodsol-green); margin-right:.75rem; }
+
+/* Brand buttons used across pages */
+.btn-wood{ background: linear-gradient(90deg,var(--woodsol-green),var(--woodsol-green-700)); color:#fff; border:none; box-shadow: 0 8px 20px rgba(11,122,68,0.12); }
+.btn-ghost{ background:transparent; border:1px solid rgba(0,0,0,0.06); }
+
+/* Hero stats */
+.hero-stats{ margin-top:1.1rem; display:flex; gap:2rem; align-items:center; flex-wrap:wrap; }
+.hero-stats .stat{ min-width:92px; }
+.hero-stats .stat .value{ color:var(--woodsol-green); font-weight:700; font-size:1.4rem; }
+
+/* Testimonials */
+.testimonial{ background: linear-gradient(180deg, rgba(247,247,247,1), #fff); padding:1.25rem; border-radius:.6rem; }
+
+/* CTA strip */
+.cta-strip{ padding:1.2rem; border-radius:.8rem; background: linear-gradient(90deg, rgba(11,122,68,0.06), rgba(11,122,68,0.03)); display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+
+/* Marquee (logo / photo scroller) */
+.marquee-wrap{ position:relative; overflow:hidden; }
+.marquee{ display:flex; width:200%; gap:2rem; align-items:center; animation: marquee 18s linear infinite; }
+.marquee-group{ display:flex; gap:1.5rem; align-items:center; padding:0 1rem; }
+.marquee img{ display:block; filter:grayscale(.0) saturate(.95); opacity:.95 }
+.marquee-wrap:hover .marquee, .marquee:focus-within{ animation-play-state:paused; }
+@keyframes marquee{ 0%{ transform:translateX(0); } 100%{ transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce){ .marquee{ animation:none; } }
+/* subtle mask for soft edges */
+.marquee-wrap{ -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent); mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent); }
+
+/* Portfolio thumbnails */
+.portfolio-thumb{display:block;width:100%;aspect-ratio:5/3;overflow:hidden;border-radius:.5rem;background:#f6f7f8}
+.portfolio-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.portfolio-meta{min-height:64px}
+.lightbox-open-focus:focus{outline:3px solid rgba(46,125,50,0.25);outline-offset:2px}
+
+/* Lightbox overlay and controls */
+.lightbox-overlay{position:fixed;inset:0;z-index:1200;display:flex;align-items:center;justify-content:center}
+.lightbox-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.6)}
+.lightbox-content{position:relative;z-index:2;max-width:90vw;max-height:90vh;display:flex;align-items:center;justify-content:center;padding:12px}
+.lightbox-image-wrapper{max-width:100%;max-height:calc(90vh - 80px);display:flex;align-items:center;justify-content:center}
+.lightbox-close{position:absolute;top:8px;right:8px;z-index:3}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3}
+.lightbox-nav.prev{left:8px}
+.lightbox-nav.next{right:8px}
+
+/* Simple helpers used by services pages */
+.service-hero{position:relative;height:320px}
+.service-meta{min-height:60px}
+.services-header-left{ flex:1; }
+.service-search{ min-width:220px; }
+.service-image-wrapper{ position:relative; height:160px; }
+.service-body{ min-height:180px; }
+.service-bullets{ padding-left:18px; }
+
+/* Image helpers */
+.service-image{ object-fit: cover; width:100%; height:100%; }
+.lightbox-image{ max-width:100%; height:auto; display:block; }
+
+/* Chat widget styles */
+.chat-widget{ position:fixed; right:1rem; bottom:1rem; z-index:1400; font-family:var(--font-sans); }
+.chat-toggle{ width:56px; height:56px; border-radius:999px; background:var(--woodsol-green); border:none; display:inline-flex; align-items:center; justify-content:center; box-shadow:0 8px 20px rgba(11,122,68,0.18); cursor:pointer; }
+.chat-toggle svg { display:block }
+.chat-panel{ position:fixed; right:1rem; bottom:76px; width:320px; max-width:calc(100% - 2rem); background:var(--brand-contrast); border:1px solid rgba(11,122,68,0.08); box-shadow:0 18px 48px rgba(11,122,68,0.12); border-radius:0.75rem; overflow:hidden; transform-origin:100% 100%; opacity:0; transform:scale(.96) translateY(6px); pointer-events:none; transition:transform 160ms ease, opacity 160ms ease; }
+.chat-panel.open{ opacity:1; transform:scale(1) translateY(0); pointer-events:auto; }
+.chat-header{ display:flex; align-items:center; justify-content:space-between; gap:8px; padding:0.75rem 0.9rem; border-bottom:1px solid rgba(11,122,68,0.04); }
+.chat-body{ padding:0.9rem; }
+.chat-actions{ display:flex; gap:0.5rem; padding:0.75rem; border-top:1px solid rgba(11,122,68,0.04); justify-content:flex-end; }
+.chat-toast{ position:fixed; right:1rem; bottom:1rem; margin-right:72px; background:rgba(0,0,0,0.8); color:#fff; padding:8px 12px; border-radius:6px; font-size:0.875rem; box-shadow:0 8px 24px rgba(0,0,0,0.18); }
+.chat-contact a{ color:var(--woodsol-green); text-decoration:none; }
+.chat-contact a:hover{ text-decoration:underline; }
+
+@media (max-width:480px){ .chat-panel{ right:0.75rem; left:0.75rem; width:auto; bottom:80px; } .chat-toggle{ right:0.75rem } }
+
+@media (max-width: 768px){ .hero-image-wrapper{ height:200px; } .marquee{ animation-duration: 22s; } }
+
+@media (prefers-reduced-motion: reduce){ .service-card, .marquee { transition:none; animation:none; } }
 .about-cta .btn-outline-secondary { border-color: rgba(0,0,0,0.08); }
 
 /* Chat widget styles */

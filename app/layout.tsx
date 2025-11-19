@@ -13,25 +13,27 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		// suppressHydrationWarning prevents React from logging hydration attribute mismatch
-		// warnings when browser extensions (for example: CrossPilot/Copilot extensions)
-		// mutate the DOM before React hydrates. The real root cause is usually an
-		// extension altering the page; disabling it in the browser or running in
-		// a clean profile will avoid the mismatch. This keeps the console clean
-		// while preserving SSR and hydration behavior.
+		// Keep markup simple and stable for SSR/hydration. Use a site-root class
+		// to allow a flex column layout so footer stays at the bottom naturally.
 		<html lang="en" suppressHydrationWarning>
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				{/* Add favicons, additional meta tags, Open Graph here */}
 			</head>
-			<body>
-						<Header />
-						<div id="page-content" role="main">
-							{children}
-						</div>
-						<Footer />
-						<ChatWidget />
+			<body className="site-root">
+				{/* Accessible skip link visible on keyboard focus */}
+				<a href="#main-content" className="skip-link">Skip to content</a>
+
+				<Header />
+
+				<main id="main-content" role="main" className="site-main">
+					{children}
+				</main>
+
+				<Footer />
+
+				<ChatWidget />
 			</body>
 		</html>
 	);

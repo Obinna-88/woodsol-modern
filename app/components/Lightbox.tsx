@@ -24,7 +24,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }: {
   return (
     <div className="lightbox-overlay" role="dialog" aria-modal="true">
       <div className="lightbox-backdrop" onClick={onClose} aria-hidden="true" />
-      <div className="lightbox-content">
+      <div className="lightbox-content" role="document">
         <button className="lightbox-close btn btn-light" onClick={onClose} aria-label="Close">✕</button>
         <div className="lightbox-image-wrapper">
           <Image src={img.src} alt={img.alt || ""} width={1200} height={800} className="lightbox-image" />

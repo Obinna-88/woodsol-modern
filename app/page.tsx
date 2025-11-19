@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import HeroCarousel from "./components/HeroCarousel";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 // Core services for Woodsol Chemicals (water & air treatment)
 const SERVICES = [
@@ -14,6 +15,7 @@ const SERVICES = [
 
 export default function Home() {
 	const [query, setQuery] = useState("");
+	const [counts, setCounts] = useState({ years: 0, clients: 0, projects: 0 });
 
 	// normalize helper: lowercase + remove diacritics for more reliable matching
 	const normalize = (str: unknown) =>
@@ -32,43 +34,30 @@ export default function Home() {
 		});
 	}, [query]);
 
+	// simple animated counters for hero stats (runs once on mount)
+	useEffect(() => {
+		let raf = 0;
+		const duration = 1400; // ms
+		const start = performance.now();
+		const targets = { years: 32, clients: 128, projects: 842 };
+
+		const step = (now: number) => {
+			const t = Math.min(1, (now - start) / duration);
+			const eased = 1 - Math.pow(1 - t, 3);
+			setCounts({
+				years: Math.round(targets.years * eased),
+				clients: Math.round(targets.clients * eased),
+				projects: Math.round(targets.projects * eased),
+			});
+			if (t < 1) raf = requestAnimationFrame(step);
+		};
+		raf = requestAnimationFrame(step);
+		return () => cancelAnimationFrame(raf);
+	}, []);
+
 	return (
 		<div>
-						{/* Theme overrides for this page; core variables live in globals.css */}
-						<style>{`
-						.hero-gradient{
-							background: linear-gradient(135deg, rgba(11,122,68,0.08), rgba(11,122,68,0.02));
-							border-radius: 1rem;
-						}
-				.brand-badge{
-					background: linear-gradient(90deg, var(--woodsol-green), #119c57);
-					color: white;
-					border-radius: .5rem;
-					padding: .25rem .6rem;
-					font-weight:600;
-				}
-						.wood-card{
-							border-radius: .8rem;
-							border: 1px solid rgba(11,122,68,0.06);
-							box-shadow: 0 6px 18px rgba(11,122,68,0.04);
-						}
-						.hero-image-bg { background: linear-gradient(180deg,var(--woodsol-green-50),#e9f6ee); }
-						.hero-image-wrapper { width:100%; max-width:520px; height:260px; }
-				.accent-underline{ display:inline-block; height:4px; background:var(--woodsol-green); width:48px; vertical-align:middle; margin-left:.5rem; border-radius:2px; }
 
-				/* Local button tweaks (global rules live in globals.css) */
-				.btn-primary { background-color: var(--woodsol-green) !important; border-color: var(--woodsol-green) !important; color: #fff !important; }
-				.btn-primary:hover, .btn-primary:focus { background-color: var(--woodsol-green-700) !important; border-color: var(--woodsol-green-700) !important; }
-
-				.text-primary { color: var(--woodsol-green) !important; }
-
-				@media (prefers-color-scheme: dark){ body { background: #07140b; color: #e9efe9; } }
-
-				/* Service card hover/focus styles */
-				.service-card { transition: transform .18s ease, box-shadow .18s ease; will-change: transform; }
-				.service-card:hover, .service-card:focus-within { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(11,122,68,0.10); }
-				.service-card:focus-within { outline: 2px solid rgba(11,122,68,0.12); outline-offset: 6px; }
-			`}</style>
 
 			{/* Header is rendered in the root layout now */}
 
@@ -77,29 +66,40 @@ export default function Home() {
 				{/* Hero */}
 				<section className="row align-items-center gy-4 hero-gradient p-4 wood-card">
 					<div className="col-12 col-md-6">
-						<h1 className="display-6 fw-bold">
-							Woodsol Chemicals — keeping systems healthy, efficient and reliable
+						<h1 className="display-6 fw-bold hero-headline">
+							Woodsol Chemicals — dependable water &amp; air treatment
 							<span className="accent-underline" />
 						</h1>
-								<p className="mt-3 text-muted">
-									Vision: “To be healthy through caring.” We deliver tailored water and
-									air treatment programs to reduce operating costs, lower downtime and
-									improve equipment life for boilers and cooling towers.
-								</p>
-
-								<div className="mt-3">
-									<strong>Key brand messages</strong>
-									<ul className="mb-0 mt-2">
-										<li>Devoted to the Heart of Industries</li>
-										<li>We Care for What Keeps You Running</li>
-										<li>Innovative, Reliable, and Environmentally Friendly Solutions</li>
-										<li>Over 30 years of Comprehensive Industrial Experience</li>
-									</ul>
-								</div>
+						<p className="hero-lead">
+							We design chemical programs, dosing systems and monitoring that reduce
+							operational costs and extend equipment life for boilers, cooling towers
+							and industrial water systems.
+						</p>
+						<div className="mt-3 d-flex gap-3 flex-wrap">
+							<span className="badge bg-light text-muted">Operational Chemistry</span>
+							<span className="badge bg-light text-muted">Dosing &amp; Supply</span>
+							<span className="badge bg-light text-muted">Testing &amp; Audits</span>
+						</div>
 
 						<div className="d-flex gap-2 flex-wrap mt-3">
-							<Link href="/contact" className="btn btn-primary btn-lg">Get a quote</Link>
-							<Link href="/portfolio" className="btn btn-outline-secondary btn-lg">View portfolio</Link>
+							<Link href="/contact" className="btn btn-wood btn-lg">Get a quote</Link>
+							<Link href="/portfolio" className="btn btn-ghost btn-lg">View portfolio</Link>
+						</div>
+
+						{/* Hero stats (animated) */}
+						<div className="d-flex gap-4 mt-4 flex-wrap align-items-center">
+							<div className="text-center me-3">
+								<div className="h3 mb-0 text-primary">{counts.years}+</div>
+								<small className="text-muted">Years experience</small>
+							</div>
+							<div className="text-center me-3">
+								<div className="h3 mb-0 text-primary">{counts.clients}+</div>
+								<small className="text-muted">Satisfied clients</small>
+							</div>
+							<div className="text-center">
+								<div className="h3 mb-0 text-primary">{counts.projects}+</div>
+								<small className="text-muted">Projects delivered</small>
+							</div>
 						</div>
 
 						{/* Search (Bootstrap input group) */}
@@ -141,6 +141,36 @@ export default function Home() {
 					</div>
 				</section>
 
+				{/* Decorative marquee (accessible + respects reduced-motion) */}
+				<section className="mt-4">
+					<div className="marquee-wrap my-3" aria-hidden="true">
+						<div className="marquee" role="presentation">
+							<div className="marquee-group d-flex align-items-center">
+								<Image src="/Boiler4.jpg" alt="Boiler equipment" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/Boilers1.jpg" alt="Boiler tube detail" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/Boiler3.jpg" alt="Industrial boiler" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/Tank4.jpg" alt="Storage tank" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/Tank3.jpg" alt="Process tank" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/Pipe Cleaned.jpg" alt="Cleaned pipework" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/image.jpeg" alt="Woodsol site" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/Boiler2.jpg" alt="Boiler installation" width={220} height={140} className="mx-3 rounded" />
+							</div>
+							{/* duplicate group for continuous scroll */}
+							<div className="marquee-group d-flex align-items-center" aria-hidden="true">
+								<Image src="/Boiler4.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/Boilers1.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/Boiler3.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/Tank4.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/Tank3.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/Pipe Cleaned.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/image.jpeg" alt="" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/Boiler2.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
+							</div>
+						</div>
+					</div>
+                    
+				</section>
+
 				{/* Services */}
 				<section id="services" className="mt-5">
 					<div className="d-flex justify-content-between align-items-end">
@@ -160,10 +190,15 @@ export default function Home() {
 						{filtered.map((s) => (
 							<div key={s.id} className="col">
 								<div className="card h-100 wood-card p-3 service-card">
-									<div className="card-body">
-										<h5 className="card-title">{s.title}</h5>
+									<div className="card-body d-flex flex-column h-100">
+										<div className="d-flex align-items-start mb-2">
+											<span className="service-icon" aria-hidden>🔬</span>
+											<h5 className="card-title mb-0">{s.title}</h5>
+										</div>
 										<p className="card-text text-muted">{s.desc}</p>
-												<Link href="/contact" className="stretched-link text-decoration-none text-primary">Request quote →</Link>
+										<div className="mt-auto">
+											<Link href="/contact" className="stretched-link text-decoration-none text-primary">Request quote →</Link>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -218,7 +253,7 @@ export default function Home() {
 					<h3 className="h5">Trusted by clients</h3>
 					<div className="row g-3 mt-3">
 						<div className="col-sm-6">
-							<div className="p-3 wood-card">
+							<div className="testimonial wood-card">
 								<blockquote className="mb-0">
 									&ldquo;Outstanding craft and clear communication — delivered on time.&rdquo;
 								</blockquote>
@@ -228,7 +263,7 @@ export default function Home() {
 							</div>
 						</div>
 						<div className="col-sm-6">
-							<div className="p-3 wood-card">
+							<div className="testimonial wood-card">
 								<blockquote className="mb-0">
 									Quality materials and great aftercare program.
 								</blockquote>
@@ -242,21 +277,14 @@ export default function Home() {
 
 				{/* CTA */}
 				<section id="contact" className="mt-5">
-					<div className="p-4 wood-card d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+					<div className="cta-strip wood-card d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
 						<div>
 							<h4 className="mb-1">Ready to start your project?</h4>
-							<div className="text-muted">
-								Tell us about your needs and we will respond with a custom proposal.
-							</div>
+							<div className="text-muted">Tell us about your needs and we will respond with a custom proposal.</div>
 						</div>
 						<div className="d-flex gap-2">
-							<Link href="/contact" className="btn btn-primary">Request a quote</Link>
-							<Link
-								href="/portfolio"
-								className="btn btn-outline-secondary"
-							>
-								See portfolio
-							</Link>
+							<Link href="/contact" className="btn btn-wood">Request a quote</Link>
+							<Link href="/portfolio" className="btn btn-ghost">See portfolio</Link>
 						</div>
 					</div>
 				</section>
