@@ -1,9 +1,5 @@
 
 "use client";
-export const metadata = {
-  title: "Contact Woodsol Chemicals",
-  description: "Get in touch with Woodsol Chemicals for water and air treatment solutions. Contact us for quotes, support, or technical advice.",
-};
 import { useState } from "react";
 
 export default function ContactPage() {
