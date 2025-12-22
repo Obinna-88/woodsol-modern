@@ -1,8 +1,9 @@
+
+"use client";
 export const metadata = {
   title: "Services | Woodsol Chemicals",
   description: "Discover Woodsol Chemicals' services for water, air, and effluent treatment, including plant design, supply, and technical support.",
 };
-"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
