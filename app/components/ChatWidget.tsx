@@ -110,7 +110,7 @@ export default function ChatWidget() {
 
           <div className="chat-contact small text-muted mt-2">
             <div>Or call us: <a href="tel:+60333713360">+60 3-3371 3360</a></div>
-            <div>Email: <a href="mailto:info@woodsol.com">info@woodsol.com</a></div>
+            <div>Email: <a href="mailto:woodsol@woodsol.com">woodsol@woodsol.com</a></div>
           </div>
         </div>
 

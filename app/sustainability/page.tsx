@@ -113,7 +113,7 @@ export default function SustainabilityPage() {
           </div>
           <div className="d-flex gap-2">
             <Link href="/contact" className="btn btn-primary">Request sustainability briefing</Link>
-            <a href="mailto:info@woodsol.com" className="btn btn-outline-secondary" rel="noopener noreferrer">Email us</a>
+            <a href="mailto:woodsol@woodsol.com" className="btn btn-outline-secondary" rel="noopener noreferrer">Email us</a>
           </div>
         </div>
       </section>

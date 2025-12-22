@@ -22,7 +22,7 @@ export default function Footer() {
             <h6 className="mb-2">Contact</h6>
             <div className="small">Tel: <a href="tel:+60333713360" className="muted-link">+60 3-3371 3360</a> &nbsp;|&nbsp; <a href="tel:+60333719516" className="muted-link">+60 3-3371 9516</a></div>
             <div className="small">WhatsApp: <a href="https://wa.me/60125117450" className="muted-link" target="_blank" rel="noopener noreferrer">+60 12 511 7450</a></div>
-            <div className="small">Email: <a href="mailto:info@woodsol.com" className="muted-link">info@woodsol.com</a></div>
+            <div className="small">Email: <a href="mailto:woodsol@woodsol.com" className="muted-link">woodsol@woodsol.com</a></div>
           </div>
 
           <div className="col-md-4 mt-3 mt-md-0">

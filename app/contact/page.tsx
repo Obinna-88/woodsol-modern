@@ -36,7 +36,7 @@ export default function ContactPage() {
     ];
     const body = encodeURIComponent(bodyLines.join("\n"));
     // open mail client
-    window.location.href = `mailto:info@woodsol.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:woodsol@woodsol.com?subject=${subject}&body=${body}`;
     setSent(true);
   }
 
@@ -61,7 +61,7 @@ export default function ContactPage() {
                 35, Jalan Raya Barat, 41100 Klang, Selangor, Malaysia<br />
                 Phone: <a href="tel:+60333713360" className="text-decoration-none">+60 3-3371 3360</a> &nbsp;|&nbsp; <a href="tel:+60333719516" className="text-decoration-none">+60 3-3371 9516</a><br />
                 WhatsApp: <a href="https://wa.me/60125117450" target="_blank" rel="noopener noreferrer" className="text-decoration-none">+60 12 511 7450</a><br />
-                Email: <a href="mailto:info@woodsol.com" className="text-decoration-none">info@woodsol.com</a>
+                Email: <a href="mailto:woodsol@woodsol.com" className="text-decoration-none">woodsol@woodsol.com</a>
               </address>
 
               <hr />

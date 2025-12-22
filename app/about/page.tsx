@@ -111,7 +111,7 @@ export default function AboutPage() {
               <h5 className="mb-1">Contact</h5>
               <p className="mb-1">35, Jalan Raya Barat, 41100 Klang, Selangor, Malaysia</p>
               <p className="mb-1">Phone: <a href="tel:+60333713360" className="text-decoration-none">+60 3-3371 3360</a> &nbsp;|&nbsp; <a href="tel:+60333719516" className="text-decoration-none">+60 3-3371 9516</a></p>
-              <p className="mb-2">Email: <a href="mailto:info@woodsol.com" className="text-decoration-none">info@woodsol.com</a></p>
+              <p className="mb-2">Email: <a href="mailto:woodsol@woodsol.com" className="text-decoration-none">woodsol@woodsol.com</a></p>
               <div className="d-grid gap-2">
                 <Link href="/contact" className="btn btn-primary btn-sm">Request a quote</Link>
                 <a href="https://wa.me/60125117450" target="_blank" rel="noopener noreferrer" className="btn btn-light btn-sm">Chat on WhatsApp</a>
