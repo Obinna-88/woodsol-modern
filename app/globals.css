@@ -1,3 +1,12 @@
+/* NotFound page styles */
+.notfound-main {
+  padding: 4rem 1rem;
+  text-align: center;
+}
+.notfound-link {
+  color: var(--woodsol-green);
+  text-decoration: underline;
+}
 @import "tailwindcss";
 
 :root {
@@ -28,12 +37,7 @@
 
 /* theme-related variables intentionally handled in :root (removed @theme to avoid unknown at-rule) */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #07140b;
-    --foreground: #e9efe9;
-  }
-}
+
 
 body {
   background: var(--background);
@@ -366,9 +370,7 @@ a:hover, a:focus { color: var(--woodsol-green-700); text-decoration-thickness: 2
 
 .footer { background: var(--woodsol-green-700); color: var(--brand-contrast); padding: 1rem; border-radius: .5rem; }
 
-@media (prefers-color-scheme: dark) {
-  body { background: var(--background); color: var(--foreground); }
-}
+
 
 /* About page hero and section styles */
 .about-hero {

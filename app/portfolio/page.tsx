@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "Portfolio | Woodsol Chemicals",
+  description: "View Woodsol Chemicals' portfolio of completed water and air treatment projects, installations, and maintenance work.",
+};
 "use client";
 import Link from "next/link";
 import Image from "next/image";

@@ -1,0 +1,16 @@
+{
+  "name": "Woodsol Chemicals",
+  "short_name": "Woodsol",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b7a44",
+  "description": "Advanced water and air treatment solutions.",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48 32x32 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

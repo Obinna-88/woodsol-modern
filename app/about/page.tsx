@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "About Woodsol Chemicals",
+  description: "Learn about Woodsol Chemicals, our mission, and our expertise in water and air treatment solutions for industry.",
+};
 import Link from "next/link";
 import Image from "next/image";
 

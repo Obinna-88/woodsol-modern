@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "Products | Woodsol Chemicals",
+  description: "Explore Woodsol Chemicals' full range of water and air treatment products for industrial and commercial applications.",
+};
 import ProductsList from "../components/ProductsList";
 
 const PRODUCTS = [
