@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Sustainability | Woodsol Chemicals",
+  title: "Sustainability",
   description: "Learn about Woodsol Chemicals' commitment to sustainability, environmental responsibility, and resource efficiency in all projects.",
 };
 import Image from "next/image";

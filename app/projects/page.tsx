@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Projects",
+  description: "Case studies from Woodsol Chemicals: boiler refits, tank maintenance and inspection programmes.",
+};
+
 import Link from "next/link";
 import Image from "next/image";
 

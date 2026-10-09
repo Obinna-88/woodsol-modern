@@ -8,7 +8,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
-	metadataBase: new URL(SITE_URL),
+	metadataBase: SITE_URL ? new URL(SITE_URL) : undefined,
 	title: { default: SITE_TITLE, template: `%s | ${SITE_NAME}` },
 	description: SITE_DESCRIPTION,
 	manifest: "/manifest.json",
