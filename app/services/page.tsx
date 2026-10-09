@@ -16,7 +16,7 @@ export default function ServicesPage() {
   }, [query]);
 
   return (
-    <main className="container py-5">
+    <div className="container py-5">
       
       <header className="mb-4 d-flex flex-column flex-md-row gap-3 align-items-start">
         <div className="services-header-left">
@@ -74,6 +74,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

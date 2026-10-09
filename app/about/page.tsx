@@ -36,7 +36,7 @@ function getIndustryIcon(name: string) {
 
 export default function AboutPage() {
   return (
-    <main className="container py-5">
+    <div className="container py-5">
       <header className="about-hero mb-4 p-3 p-md-4">
         <div className="about-hero-grid d-flex flex-column flex-md-row align-items-stretch gap-3">
           <div className="about-hero-copy flex-fill">
@@ -211,6 +211,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

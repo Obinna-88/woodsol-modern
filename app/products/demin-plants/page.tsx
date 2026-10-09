@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function DeminPlantsPage() {
   return (
-    <main className="container py-5">
+    <div className="container py-5">
       <header className="mb-4">
         <h1 className="display-6">Demin Water Plants & Mobile Units</h1>
         <p className="text-muted">Design, supply and operate demineralized water systems tailored to your capacity and feedwater quality.</p>
@@ -51,6 +51,6 @@ export default function DeminPlantsPage() {
           <Link href="/products" className="btn btn-outline-secondary">Back to products</Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

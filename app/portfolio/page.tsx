@@ -7,7 +7,7 @@ import Lightbox from "../components/Lightbox";
 
 const PORTFOLIO = [
   { id: 'p1', title: 'Boiler Plant Installation', desc: 'Full boiler plant refurbishment and chemical conditioning.', image: '/Boiler3.jpg' },
-  { id: 'p2', title: 'Pipe Cleaning & Maintenance', desc: 'High-pressure pipe cleaning and passivation services.', image: '/Pipe Cleaned.jpg' },
+  { id: 'p2', title: 'Pipe Cleaning & Maintenance', desc: 'High-pressure pipe cleaning and passivation services.', image: '/pipe-cleaned.jpg' },
   { id: 'p3', title: 'Tank Works & Storage', desc: 'Storage tank cleaning, lining and inspection.', image: '/Tank1.jpg' },
   { id: 'p4', title: 'Boiler Suite', desc: 'Large-scale boiler installation.', image: '/Boiler2.jpg' },
   { id: 'p5', title: 'Boiler Maintenance', desc: 'Routine maintenance and servicing.', image: '/Boiler4.jpg' },
@@ -24,7 +24,7 @@ export default function PortfolioPage() {
   function next() { if (openIndex === null) return; setOpenIndex((openIndex + 1) % images.length); }
 
   return (
-    <main className="container py-5">
+    <div className="container py-5">
       <header className="mb-4">
         <h1 className="display-6">Portfolio</h1>
         <p className="text-muted">A selection of completed projects showcasing our craft. More items will be added soon.</p>
@@ -69,6 +69,6 @@ export default function PortfolioPage() {
       {openIndex !== null && (
         <Lightbox images={images} index={openIndex} onClose={close} onPrev={prev} onNext={next} />
       )}
-    </main>
+    </div>
   );
 }

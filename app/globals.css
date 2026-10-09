@@ -624,7 +624,7 @@ a:hover, a:focus { color: var(--woodsol-green-700); text-decoration-thickness: 2
 /* Hero photo gallery (uses images in /public) */
 .hero-photo-main { background-image: url('/Boilers1.jpg'); background-size: cover; background-position: center; min-height: 260px; }
 .hero-photo-top { background-image: url('/Boiler2.jpg'); background-size: cover; background-position: center; height: 50%; }
-.hero-photo-bottom { background-image: url('/Pipe Cleaned.jpg'); background-size: cover; background-position: center; height: 50%; }
+.hero-photo-bottom { background-image: url('/pipe-cleaned.jpg'); background-size: cover; background-position: center; height: 50%; }
 .hero-photo, .hero-photo-main, .hero-photo-top, .hero-photo-bottom { border-radius: .6rem; overflow: hidden; }
 
 /* Layout for hero gallery right column */

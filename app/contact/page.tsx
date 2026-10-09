@@ -46,7 +46,7 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="container py-5">
+    <div className="container py-5">
       <header className="mb-4">
         <h1 className="display-6">Contact</h1>
         <p className="text-muted">Get in touch — we are happy to discuss your requirements.</p>
@@ -118,6 +118,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

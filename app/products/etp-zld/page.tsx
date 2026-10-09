@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function ETPZldPage() {
   return (
-    <main className="container py-5">
+    <div className="container py-5">
       <header className="mb-4">
         <h1 className="display-6">Effluent Treatment & ZLD Systems</h1>
         <p className="text-muted">Complete effluent management solutions including ETP, ZLD and biogas integration for sustainable water reuse.</p>
@@ -51,6 +51,6 @@ export default function ETPZldPage() {
           <Link href="/products" className="btn btn-outline-secondary">Back to products</Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

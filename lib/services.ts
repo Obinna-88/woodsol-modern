@@ -41,7 +41,7 @@ export const SERVICES: Service[] = [
     title: "Effluent Treatment & ZLD",
     summary: "End-to-end effluent treatment, ZLD and biogas solutions for industrial streams.",
     bullets: ["ETP design", "ZLD implementation", "Biogas recovery"],
-    image: "/Pipe Cleaned.jpg",
+    image: "/pipe-cleaned.jpg",
     details:
       "Design and implementation of effluent treatment plants with options for Zero Liquid Discharge (ZLD) and resource recovery. We provide process design, equipment supply and commissioning.",
   },

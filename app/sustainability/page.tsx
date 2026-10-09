@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function SustainabilityPage() {
   return (
-    <main className="container py-5">
+    <div className="container py-5">
       <header className="about-hero mb-4 p-4 d-flex flex-column flex-md-row gap-3">
         <div className="about-hero-copy">
           <h1 className="display-6 mb-1">Sustainability &amp; Environmental Commitment</h1>
@@ -117,6 +117,6 @@ export default function SustainabilityPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

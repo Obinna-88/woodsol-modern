@@ -9,7 +9,7 @@ const CASES = [
 
 export default function ProjectsPage() {
   return (
-    <main className="container py-5">
+    <div className="container py-5">
       <header className="mb-4">
         <h1 className="display-6">Projects</h1>
         <p className="text-muted">Selected projects and case studies showcasing our craft and delivery.</p>
@@ -33,6 +33,6 @@ export default function ProjectsPage() {
           </article>
         ))}
       </section>
-    </main>
+    </div>
   );
 }

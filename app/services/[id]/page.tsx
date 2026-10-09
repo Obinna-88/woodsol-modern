@@ -12,7 +12,7 @@ export default function ServiceDetailPage({ params }: Props) {
 
   if (!svc) {
     return (
-      <main className="container py-5">
+      <div className="container py-5">
         <div className="mb-4 d-flex align-items-center gap-3">
           <Link href="/services" className="btn btn-outline-secondary btn-sm">← Back to services</Link>
           <h1 className="h4 mb-0">Service not found</h1>
@@ -21,12 +21,12 @@ export default function ServiceDetailPage({ params }: Props) {
         <div className="mt-4">
           <Link href="/services" className="btn btn-primary">Back to services</Link>
         </div>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="container py-5">
+    <div className="container py-5">
 
       <div className="mb-4 d-flex gap-3 align-items-start">
         <Link href="/services" className="btn btn-outline-secondary btn-sm">← Back to services</Link>
@@ -75,6 +75,6 @@ export default function ServiceDetailPage({ params }: Props) {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

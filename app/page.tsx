@@ -62,7 +62,7 @@ export default function Home() {
 			{/* Header is rendered in the root layout now */}
 
 			{/* Main container */}
-			<main className="container py-5">
+			<div className="container py-5">
 				{/* Hero */}
 				<section className="row align-items-center gy-4 hero-gradient p-4 wood-card">
 					<div className="col-12 col-md-6">
@@ -115,7 +115,7 @@ export default function Home() {
 									id="search"
 									type="search"
 									className="form-control"
-									placeholder='Search services — try "flooring", "design"...'
+									placeholder='Search services — try "boiler", "ZLD"...'
 									value={query}
 									onChange={(e) => setQuery(e.target.value)}
 								/>
@@ -151,7 +151,7 @@ export default function Home() {
 								<Image src="/Boiler3.jpg" alt="Industrial boiler" width={220} height={140} className="mx-3 rounded" />
 								<Image src="/Tank4.jpg" alt="Storage tank" width={220} height={140} className="mx-3 rounded" />
 								<Image src="/Tank3.jpg" alt="Process tank" width={220} height={140} className="mx-3 rounded" />
-								<Image src="/Pipe Cleaned.jpg" alt="Cleaned pipework" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/pipe-cleaned.jpg" alt="Cleaned pipework" width={220} height={140} className="mx-3 rounded" />
 								<Image src="/image.jpeg" alt="Woodsol site" width={220} height={140} className="mx-3 rounded" />
 								<Image src="/Boiler2.jpg" alt="Boiler installation" width={220} height={140} className="mx-3 rounded" />
 							</div>
@@ -162,7 +162,7 @@ export default function Home() {
 								<Image src="/Boiler3.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
 								<Image src="/Tank4.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
 								<Image src="/Tank3.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
-								<Image src="/Pipe Cleaned.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
+								<Image src="/pipe-cleaned.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
 								<Image src="/image.jpeg" alt="" width={220} height={140} className="mx-3 rounded" />
 								<Image src="/Boiler2.jpg" alt="" width={220} height={140} className="mx-3 rounded" />
 							</div>
@@ -290,7 +290,7 @@ export default function Home() {
 				</section>
 
 				{/* Footer is rendered in the root layout — removed local Footer to avoid duplicate */}
-			</main>
+			</div>
 		</div>
 	);
 }

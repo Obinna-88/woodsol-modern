@@ -69,7 +69,7 @@ const PRODUCTS = [
 
 export default function ProductsPage() {
   return (
-    <main className="container py-5">
+    <div className="container py-5">
       <header className="mb-4">
         <h1 className="display-6">Products</h1>
         <p className="text-muted">Our product and equipment catalogue for water, air and effluent treatment.</p>
@@ -78,6 +78,6 @@ export default function ProductsPage() {
       <section>
         <ProductsList products={PRODUCTS} />
       </section>
-    </main>
+    </div>
   );
 }
